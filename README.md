@@ -35,10 +35,6 @@ Classifies a face into one of 7 basic emotions: `angry`, `disgusted`, `fearful`,
 classes by far. Full breakdown, confusion matrix, ROC curves, and calibration plots are
 in `notebooks/evaluation.ipynb` and `images/*_rafdb.png`.
 
-**Calibration caveat**: confidence scores are not fully trustworthy — the model is
-noticeably overconfident in the mid-confidence range (see `images/calibration_rafdb.png`).
-Treat the `scores` field from the API as a ranking, not a true probability.
-
 ## Project structure
 
 ```
@@ -51,8 +47,6 @@ images/                 # evaluation plots (checked into git)
 requirements.txt
 ```
 
-`data/` and the trained `.pth` weights are gitignored (large/derived — see below for how
-to regenerate them).
 
 ## Data setup
 
