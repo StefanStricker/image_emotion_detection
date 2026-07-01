@@ -1,3 +1,7 @@
 data/
 venv/
 convnext_tiny.pth
+.claude/
+__pycache__/
+convnext_small.pth
+convnext_small_rafdb.pth

@@ -4,13 +4,9 @@ torch
 torchvision
 Pillow
 scikit-learn
-facenet-pytorch
-opencv-python
 tqdm
 matplotlib
-
-diffusers
-transformers
-accelerate
-safetensors
-huggingface-hub
+fastapi
+uvicorn[standard]
+python-multipart
+facenet-pytorch
