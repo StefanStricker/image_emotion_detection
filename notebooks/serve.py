@@ -13,7 +13,7 @@ from pydantic import BaseModel
 
 # ---------------------------------------------------------------------------
 # Constants
-# ---------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 MODEL_PATH = PROJECT_ROOT / "convnext_small_rafdb.pth"
