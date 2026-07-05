@@ -5,33 +5,33 @@ Classifies a face into one of 7 basic emotions: `angry`, `disgusted`, `fearful`,
 
 ## Approach
 
-- **Model**: ConvNeXt-Small (ImageNet-pretrained), fine-tuned in two stages — classifier
-  head only, then the full network with a differential learning rate. See
+- **Model**: ConvNeXt-Small (ImageNet-pretrained), fine-tuned in two stages: 1. classifier
+  head only, 2. the full network with a differential learning rate. See
   `notebooks/model_train.ipynb` for the full training setup (focal loss, class-weighted
-  sampling, MixUp/CutMix, OneCycle + cosine LR schedules, early stopping)
+  sampling, CutMix, OneCycle + cosine LR schedules, early stopping)
 - **Dataset**: [RAF-DB](http://www.whdeng.cn/raf/model1.html) (aligned, 100×100 RGB,
-  real-world photos) — not included in this repo, see [Data setup](#data-setup) below.
+  real-world photos) not included in this repo, see [Data setup](#data-setup) below.
 - **Serving**: a small FastAPI app (`notebooks/serve.py`) exposing a `/predict` endpoint.
 
 ## Results (RAF-DB test set, with test-time augmentation)
 
 | Metric | Value |
 |---|---|
-| Accuracy | 81.6% |
-| Macro F1 | 0.746 |
-| Expected Calibration Error (ECE) | 0.168 |
+| Accuracy | 86.1% |
+| Macro F1 | 0.778 |
+| Expected Calibration Error (ECE) | 0.027 |
 
 | Class | Precision | Recall | F1 |
 |---|---|---|---|
-| angry | 0.70 | 0.82 | 0.75 |
-| disgusted | 0.50 | 0.66 | 0.57 |
-| fearful | 0.51 | 0.62 | 0.56 |
-| happy | 0.98 | 0.82 | 0.90 |
-| neutral | 0.79 | 0.79 | 0.79 |
-| sad | 0.79 | 0.87 | 0.83 |
-| surprised | 0.78 | 0.88 | 0.83 |
+| angry | 0.83 | 0.75 | 0.79 |
+| disgusted | 0.63 | 0.59 | 0.61 |
+| fearful | 0.71 | 0.49 | 0.58 |
+| happy | 0.96 | 0.93 | 0.95 |
+| neutral | 0.82 | 0.86 | 0.84 |
+| sad | 0.83 | 0.85 | 0.84 |
+| surprised | 0.82 | 0.88 | 0.85 |
 
-`fearful` and `disgusted` are the weakest classes — they're also RAF-DB's smallest
+`fearful` and `disgusted` are the weakest classes, they're also RAF-DB's smallest
 classes by far. Full breakdown, confusion matrix, ROC curves, and calibration plots are
 in `notebooks/evaluation.ipynb` and `images/*_rafdb.png`.
 
@@ -53,7 +53,7 @@ requirements.txt
 1. Download RAF-DB (aligned) from Kaggle, e.g.
    [shuvoalok/raf-db-dataset](https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset)
 2. Extract data.
-3. Run `notebooks/preprocessing.ipynb` — it maps RAF-DB's numeric labels to emotion names,
+3. Run `notebooks/preprocessing.ipynb` maps RAF-DB's numeric labels to emotion names,
    carves a validation split out of the official train split, and writes everything to
    `data/dataset_split_rafdb/`.
 
