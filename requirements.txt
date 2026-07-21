@@ -10,3 +10,6 @@ fastapi
 uvicorn[standard]
 python-multipart
 facenet-pytorch
+streamlit
+plotly
+requests

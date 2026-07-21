@@ -11,7 +11,8 @@ Classifies a face into one of 7 basic emotions: `angry`, `disgusted`, `fearful`,
   sampling, CutMix, OneCycle + cosine LR schedules, early stopping)
 - **Dataset**: [RAF-DB](http://www.whdeng.cn/raf/model1.html) (aligned, 100×100 RGB,
   real-world photos) not included in this repo, see [Data setup](#data-setup) below.
-- **Serving**: a small FastAPI app (`notebooks/serve.py`) exposing a `/predict` endpoint.
+- **Serving**: a small FastAPI app (`notebooks/serve.py`) exposing a `/predict` endpoint,
+  with a Streamlit GUI (`notebooks/streamlit_app.py`) on top for non-technical users.
 
 ## Results (RAF-DB test set, with test-time augmentation)
 
@@ -43,6 +44,7 @@ notebooks/
   model_train.ipynb     # trains ConvNeXt-Small, saves convnext_small_rafdb.pth
   evaluation.ipynb      # metrics, confusion matrix, ROC/AUC, calibration, saved to images/
   serve.py              # FastAPI inference server
+  streamlit_app.py      # GUI (upload a photo, see the predicted emotion)
 images/                 # evaluation plots (checked into git)
 requirements.txt
 ```
@@ -86,4 +88,10 @@ pip install -r requirements.txt
                 "neutral": 0.04, "sad": 0.01, "surprised": 0.02}
    }
    ```
+5. **GUI** (needs the server from step 4 running in another terminal):
+   ```bash
+   streamlit run notebooks/streamlit_app.py
+   ```
+   Opens a browser page where you upload a photo and see the predicted emotion with a
+   confidence chart. No command line or JSON required.
 
